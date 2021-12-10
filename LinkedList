@@ -1,0 +1,128 @@
+#include<iostream>
+using namespace std;
+class LinkedList{
+    public:
+    struct node{
+        int data;
+        node*next;
+
+        node(int val){
+            data = val;
+            next=NULL;
+        }
+    };
+    node *head=NULL;
+    void InsertATHead(int data){
+       if(head==NULL){
+           head= new node(data);
+       }
+       else{
+           node*curr=head;
+           head=new node(data);
+           head->next=curr;
+
+       }
+      
+   }
+   void InserATEnd(int val){
+       if(head==NULL){
+           InsertATHead(val);
+       }
+       else{
+           node* curr=head;
+           node*prev=NULL;
+           while(curr!=NULL){
+               prev=curr;
+               curr=curr->next;
+           }
+           
+           prev->next =new node(val);
+       }
+   }
+
+   void InsetATMid(int val){
+       if(head==NULL || head->next==NULL){
+           cout<<"NO MID found"<<endl;
+       }
+       else{
+           node*slow=head;
+           node*fast=head;
+           while(!fast && !fast->next){ 
+               slow=slow->next;
+               fast=fast->next->next;
+           }
+           node*toadd=new node(val);
+           toadd->next=slow->next;
+           slow->next=toadd;
+       }
+   }
+   void display(node * &head){
+       node* curr=head;
+        while(curr!=NULL){
+            cout<<curr->data<<"->";
+            curr=curr->next;
+        }
+        cout<<"NULL"<<endl;
+   }
+   void reverse(){
+       node*curr = head;
+       node*prev=NULL;
+       node*next=NULL;
+       while(curr!=NULL){ 
+        next=curr->next;       //before changing store the next of curr 
+        curr->next=prev;      //changing the next of curr
+        prev=curr;          //pointing prev to next node
+        curr=next;      //pointing curr to next node
+        head=prev;      //pointing head to prev coz it will get null if we point it to curr
+           
+       }
+       
+       
+       
+       
+   }
+};
+int main(){
+    
+    LinkedList a1;
+    a1.display(a1.head);
+    a1.InsetATMid(9);
+    a1.display(a1.head);
+    a1.InserATEnd(1);
+    a1.display(a1.head);
+    a1.InsetATMid(9);
+    
+    a1.display(a1.head);
+
+    a1.InsertATHead(5);
+    a1.display(a1.head);
+    a1.InsetATMid(9);
+    a1.display(a1.head);
+
+    a1.InsertATHead(4);
+    a1.display(a1.head);
+    a1.InsetATMid(9);
+    a1.display(a1.head);
+
+    a1.InsertATHead(3);
+    a1.display(a1.head);
+    a1.InsetATMid(9);
+    a1.display(a1.head);
+
+    a1.InserATEnd(6);
+    a1.display(a1.head);
+    a1.InsetATMid(9);
+    a1.display(a1.head);
+
+    a1.display(a1.head);
+    a1.display(a1.head);
+    a1.InsetATMid(9);
+    a1.display(a1.head);
+    a1.reverse();
+    a1.display(a1.head);
+    
+    a1.reverse();
+    a1.display(a1.head);
+    
+
+}
